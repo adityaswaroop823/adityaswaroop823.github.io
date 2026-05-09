@@ -23,13 +23,21 @@ renderer.toneMappingExposure = 1.1;
 scene.background = new THREE.Color(0x050810);
 
 // post-processing composer (bloom for premium glow)
-const composer = new EffectComposer(renderer);
+// Multisampled render target — fixes aliasing/block artifacts from EffectComposer losing default MSAA
+const composerRT = new THREE.WebGLRenderTarget(
+  window.innerWidth, window.innerHeight,
+  {
+    samples: 4,
+    type: THREE.HalfFloatType,
+  }
+);
+const composer = new EffectComposer(renderer, composerRT);
 composer.addPass(new RenderPass(scene, camera));
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.55,  // strength — calmer, doesn't wash out text
-  0.6,   // radius
-  0.4    // threshold — only bright peaks bloom
+  0.5,   // strength
+  0.7,   // radius — softer falloff
+  0.45   // threshold — only highlights bloom
 );
 composer.addPass(bloomPass);
 composer.addPass(new OutputPass());
@@ -146,6 +154,9 @@ const fragmentShader = /* glsl */ `
     float depth = clamp(vWorldPos.z * 0.5 + 0.5, 0.4, 1.0);
     color *= depth;
 
+    // cap brightness to prevent bloom block artifacts on extreme HDR peaks
+    color = min(color, vec3(1.8));
+
     gl_FragColor = vec4(color, 1.0);
   }
 `;
@@ -163,11 +174,13 @@ const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 // thin wireframe ghost overlay — cyan structural lattice
-const wireGeo = new THREE.IcosahedronGeometry(1.62, 2);
+// Slightly larger than mesh, subdivision 1 (less geometry = no bloom block artifacts)
+const wireGeo = new THREE.IcosahedronGeometry(1.78, 1);
 const wireMat = new THREE.LineBasicMaterial({
   color: 0x00e5ff,
   transparent: true,
-  opacity: 0.28,
+  opacity: 0.18,
+  depthWrite: false,
 });
 const wireframe = new THREE.LineSegments(new THREE.WireframeGeometry(wireGeo), wireMat);
 scene.add(wireframe);
@@ -244,10 +257,14 @@ window.addEventListener('scroll', () => {
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
+  const dpr = Math.min(window.devicePixelRatio, 2);
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
+  composer.setPixelRatio(dpr);
   bloomPass.setSize(window.innerWidth, window.innerHeight);
 });
+// match composer pixel ratio at boot
+composer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // ====== animation loop ======
 const clock = new THREE.Clock();
