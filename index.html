@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aditya Swaroop — Frontend Builder</title>
+  <meta name="description" content="Frontend Builder. End-to-end owner of Web, Samsung TV, and LG TV at STAGE. React, Next.js, Tizen, webOS." />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- intro loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__mark">aditya.swaroop<span class="loader__dot">_</span></div>
+    <div class="loader__bar"><span></span></div>
+    <div class="loader__caption">[ booting frontend builder · v.2026 ]</div>
+  </div>
+  <script>
+    // failsafe loader dismiss (runs independent of module script)
+    (function () {
+      function dismiss() {
+        var l = document.querySelector('.loader');
+        if (l) l.classList.add('done');
+      }
+      // first attempt: 1.6s after DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () { setTimeout(dismiss, 1600); });
+      } else {
+        setTimeout(dismiss, 1600);
+      }
+      // hard failsafe — never leave the loader stuck even if module errors
+      setTimeout(dismiss, 4500);
+    })();
+  </script>
+
+  <!-- custom cursor (hidden on touch) -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a class="nav__logo" href="#top">AS_<span class="italic">02</span></a>
+    <ul class="nav__links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="nav__cta" href="./Aditya-Swaroop-Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__badge">
+        <span class="dot"></span>&nbsp;Status: Online · Noida, IN · Open to select work
+      </div>
+      <h1 class="hero__name">
+        <span class="serif">Aditya</span>
+        <span class="serif italic">Swaroop.</span>
+      </h1>
+      <p class="hero__tagline">
+        Frontend Builder &nbsp;·&nbsp; End-to-end owner of Web, Samsung TV &amp; LG TV at
+        <span class="accent">STAGE</span>.
+      </p>
+      <div class="hero__meta">
+        <span>3+ yrs shipping</span>
+        <span class="dotsep">·</span>
+        <span>React</span>
+        <span class="dotsep">·</span>
+        <span>Next.js</span>
+        <span class="dotsep">·</span>
+        <span>Tizen</span>
+        <span class="dotsep">·</span>
+        <span>webOS</span>
+        <span class="dotsep">·</span>
+        <span>AI-driven dev</span>
+      </div>
+      <div class="hero__scroll">
+        <span class="line"></span>
+        <span>scroll</span>
+      </div>
+    </section>
+
+    <!-- editorial stats marquee -->
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span><b class="serif italic">2×</b> subscription rate</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">27 → 42%</b> conversion</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">7s → 3s</b> LCP</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">30 → 8 min</b> CI</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">2 mos → 2 min</b> OTA</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">30+</b> programmatic SEO PRs</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">~40%</b> AI cost reduction</span>
+        <span class="sep">●</span>
+        <!-- duplicate for seamless loop -->
+        <span><b class="serif italic">2×</b> subscription rate</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">27 → 42%</b> conversion</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">7s → 3s</b> LCP</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">30 → 8 min</b> CI</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">2 mos → 2 min</b> OTA</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">30+</b> programmatic SEO PRs</span>
+        <span class="sep">●</span>
+        <span><b class="serif italic">~40%</b> AI cost reduction</span>
+        <span class="sep">●</span>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="section__label">001 &nbsp;—&nbsp; Approach</div>
+      <p class="about__text">
+        I ship across every surface — <span class="accent">Web, Samsung TV, LG TV</span>, backend, and AI tooling.
+        Stack is the means, not the goal. The goal is <em class="serif">measurable outcomes:</em>
+        2× subscription rate, 27&nbsp;→&nbsp;42% conversion, 30&nbsp;min&nbsp;→&nbsp;8&nbsp;min CI, 7s&nbsp;→&nbsp;3s LCP.
+      </p>
+    </section>
+
+    <section class="work" id="work">
+      <div class="section__label">002 &nbsp;—&nbsp; Experience</div>
+      <h2 class="section__heading">
+        <span class="serif">Where I've</span>
+        <span class="serif italic">shipped.</span>
+      </h2>
+
+      <article class="role">
+        <header>
+          <div>
+            <h3>STAGE</h3>
+            <span class="role__title">Software Engineer · Frontend</span>
+          </div>
+          <span class="role__date">Sep 2025 — Present</span>
+        </header>
+        <ul>
+          <li><b>End-to-end owner</b> of Web, Samsung TV, and LG TV — three production frontend platforms (React, Next.js, Tizen, webOS).</li>
+          <li>Owned the Web funnel; improved web-to-app-install <code>trial_activated</code> conversion <b>27% → 42%</b> via UI experiments, copy/CTA iterations, and frontend perf work.</li>
+          <li>Drove <b>2× subscription rate</b> end-to-end — spotted the opportunity from product metrics, designed the UX, and shipped the entire frontend solo using fully AI-driven development.</li>
+          <li>Led the <b>Watch Page revamp</b> using <b>HLS adaptive streaming</b>; monitored Mux viewer-experience metrics post-launch to catch regressions.</li>
+          <li>Migrated hosting Vercel → AWS Amplify (~90% cost reduction) → self-hosted (~70% further); improved <b>Web LCP 7s → 3s</b> via bundle splitting, lazy loading, SSR cache tuning.</li>
+          <li>Built <b>Samsung TV (Tizen)</b> + <b>LG TV (webOS)</b> apps from zero — solved remote-key navigation, focus management, quirky TV browsers; <b>OTA</b> reduced release time from <b>~2 months → ~2 minutes</b>.</li>
+          <li>Shipped <b>2 full TV-app stack migrations in 10 days</b> (Next.js → .NET → React) on hypothesis-driven perf measurement.</li>
+          <li>Migrated CI <b>Cypress Cloud → cypress-split</b> with parallel sharding — test time <b>30 min → 8 min</b> (~73% faster), zero paid deps.</li>
+          <li>Built automated <b>SEO + ASO agents</b> with self-improving auto-research — drove <b>30+ programmatic SEO PRs</b>; replaced third-party SEO agency.</li>
+          <li>Authored the <b>AI Coding Playbook</b> + <b>Code Review Council</b> — team-wide defaults; reduced AI tool costs <b>~40%</b> via token optimization.</li>
+        </ul>
+      </article>
+
+      <article class="role">
+        <header>
+          <div>
+            <h3>Liberin Technologies</h3>
+            <span class="role__title">Software Engineer</span>
+          </div>
+          <span class="role__date">Jun 2023 — Sep 2025</span>
+        </header>
+        <ul>
+          <li>Migrated a large-scale frontend <b>Vue 2 → Vue 3</b>; built dynamic admin dashboards in Vue 3 + TypeScript + Tailwind, improving usability <b>30%</b>.</li>
+          <li>Developed an <b>AI-powered Next.js feature</b> auto-generating charts, diagrams, and SQL queries for faster decisions.</li>
+          <li>Built a custom <b>Keycloak + OAuth2 auth library</b> with <b>Role-Based Access Control</b> across services.</li>
+          <li>Engineered a <b>Face Recognition system</b> for employee attendance, removing third-party dependencies.</li>
+          <li>Led an enterprise-grade <b>Angular</b> app — Reactive Forms, RxJS, route-driven failover; <b>SonarQube Pass</b> (0 bugs, 0 vulnerabilities).</li>
+        </ul>
+      </article>
+
+      <article class="role">
+        <header>
+          <div>
+            <h3>Krishify</h3>
+            <span class="role__title">Software Engineer</span>
+          </div>
+          <span class="role__date">Jul 2022 — Jun 2023</span>
+        </header>
+        <ul>
+          <li>Contributed to <b>India's first Agri Chatbot</b> with speech recognition — built in <b>48 hours</b> using Next.js.</li>
+          <li>Developed <b>Krishify Shop</b> (React + Redux + Material UI), an e-commerce platform serving <b>10M+ users</b>.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="section__label">003 &nbsp;—&nbsp; Projects</div>
+      <h2 class="section__heading">
+        <span class="serif">Things I built</span>
+        <span class="serif italic">on the side.</span>
+      </h2>
+
+      <div class="projects__grid">
+        <a class="project" href="#" data-num="01">
+          <div class="project__top">
+            <span class="project__num">01</span>
+            <span class="project__status">in progress</span>
+          </div>
+          <h3>Citovo</h3>
+          <p>Automated end-to-end SEO &amp; GEO platform — SEO audits, programmatic SEO, AI-generated blogs, and prompts users feed into their own AI agents to auto-fix SEO issues.</p>
+          <div class="project__stack">Next.js · AI · pSEO</div>
+        </a>
+
+        <a class="project" href="#" data-num="02">
+          <div class="project__top">
+            <span class="project__num">02</span>
+            <span class="project__status">in progress · open source</span>
+          </div>
+          <h3>SWORD</h3>
+          <p>Native desktop GUI for Claude Code — Claude.ai-style UI, markdown + Shiki syntax highlighting, multi-chat sidebar, and zero-config auth auto-detecting existing Claude sessions.</p>
+          <div class="project__stack">Tauri · React · Claude</div>
+        </a>
+
+        <a class="project" href="https://inspex.in" target="_blank" rel="noopener" data-num="03">
+          <div class="project__top">
+            <span class="project__num">03</span>
+            <span class="project__status">live · inspex.in&nbsp;↗</span>
+          </div>
+          <h3>Inspex.in</h3>
+          <p>Company intelligence platform on Indian companies — SSR SEO pages, Razorpay-integrated paid MCA doc downloads, queue-based delivery, AI-driven discovery.</p>
+          <div class="project__stack">Next.js · MongoDB · SQLite</div>
+        </a>
+
+        <a class="project" href="https://examsankalp.in" target="_blank" rel="noopener" data-num="04">
+          <div class="project__top">
+            <span class="project__num">04</span>
+            <span class="project__status">live · examsankalp.in&nbsp;↗</span>
+          </div>
+          <h3>Exam Sankalp</h3>
+          <p>Practice platform for Indian govt exam aspirants (JEE, UPSC, SSC, Banking, Railways) — AI-generated questions, PYQ banks, mock tests, performance analytics.</p>
+          <div class="project__stack">Next.js · MongoDB · Supabase · Python</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="skills">
+      <div class="section__label">004 &nbsp;—&nbsp; Toolkit</div>
+      <h2 class="section__heading">
+        <span class="serif">What's</span>
+        <span class="serif italic">in the bag.</span>
+      </h2>
+      <dl class="skills__list">
+        <div><dt>Languages</dt><dd>JavaScript · TypeScript · HTML · CSS</dd></div>
+        <div><dt>Frontend</dt><dd>React · Next.js (App Router, SSR/SSG) · Vue · Angular · Tailwind · Material UI · PrimeVue · Three.js · Storybook</dd></div>
+        <div><dt>Performance</dt><dd>Web Vitals (LCP / CLS / INP) · Lighthouse · Mux · code-splitting · lazy loading · HLS</dd></div>
+        <div><dt>TV Platforms</dt><dd>Tizen OS (Samsung) · webOS (LG) · remote-key navigation · OTA</dd></div>
+        <div><dt>Backend &amp; Data</dt><dd>Node.js · Express.js · MongoDB · REST · GraphQL</dd></div>
+        <div><dt>Testing, CI, AI</dt><dd>Jest · Vitest · Playwright · Cypress (cypress-split) · GitHub Actions · AWS Amplify · Vercel · Claude · Amplitude · DataDog · Statsig</dd></div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="section__label">005 &nbsp;—&nbsp; Contact</div>
+      <h2 class="contact__heading">
+        <span class="serif italic">Got something</span><br />
+        <span class="serif">worth building?</span>
+      </h2>
+      <p class="contact__lead">I'm picky but reachable. Drop a line.</p>
+      <div class="contact__links">
+        <a href="mailto:adityaswaroop80@gmail.com">adityaswaroop80@gmail.com&nbsp;<span class="arr">→</span></a>
+        <a href="tel:+918757772091">+91 87577 72091&nbsp;<span class="arr">→</span></a>
+        <a href="https://www.linkedin.com/in/aditya-swaroop" target="_blank" rel="noopener">LinkedIn&nbsp;<span class="arr">↗</span></a>
+        <a href="https://github.com/adityaswaroop823" target="_blank" rel="noopener">GitHub&nbsp;<span class="arr">↗</span></a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 &nbsp;Aditya Swaroop</span>
+      <span class="footer__mid">crafted in Noida — running on Three.js</span>
+      <span><a href="#top">Back to top ↑</a></span>
+    </footer>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
